@@ -12,11 +12,29 @@ namespace Wk3Ex1
         {
             //declarations
             double score = 0;
-            
-            //ask the user for the input of the score
-            Console.WriteLine("What is a numeric score (0 to 100)?");
-            //user inputs their score
-            score = Convert.ToDouble(Console.ReadLine());
+
+            //keep asking them for a value until a valid value is a input
+            do
+            {
+                try
+                {
+                    //ask the user for the input of the score
+                    Console.WriteLine("What is a numeric score (0 to 100)?");
+                    //user inputs their score
+                    score = Convert.ToDouble(Console.ReadLine());// score will throw a exception if the wrong format number is put
+                    if (score < 0 || score > 100)
+                    {
+                        Console.WriteLine("Invalid input");// this is a custom exception is thrown when number is out of range
+                        score = -1;
+                    }
+                }
+                catch (Exception e)
+                {
+                    //console.writeline($"Error: (e.message)");
+                    Console.WriteLine("Invalid input.Please input a valid number");
+                }
+            } while (score == -1);
+
 
             //96.7
             int roundedScore = Convert.ToInt32(Math.Round(score));
